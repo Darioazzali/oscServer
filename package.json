@@ -1,0 +1,38 @@
+{
+  "name": "osc-cli",
+  "version": "1.0.0",
+  "description": "Command line ",
+  "exports": "./script/run/run.js",
+  "type": "module",
+  "scripts": {
+    "osc": "nodemon --no-stdin ./script/run.ts",
+    "build": "tsc && node ./script/run/run.js",
+    "frontend": "npm install --prefix ./frontend/package.json"
+  },
+  "author": "dario",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/ora": "^3.2.0",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@octokit/auth-basic": "^1.4.8",
+    "@octokit/rest": "^19.0.7",
+    "@types/figlet": "^1.5.5",
+    "@types/inquirer": "^9.0.3",
+    "chalk": "^5.2.0",
+    "clear": "^0.1.0",
+    "configstore": "^6.0.0",
+    "figlet": "^1.5.2",
+    "inquirer": "^9.1.5",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.8",
+    "ora": "^6.3.0",
+    "prova": "file:frontend",
+    "simple-git": "^3.17.0",
+    "touch": "^3.1.0",
+    "ts-node": "^10.9.1"
+  }
+}
