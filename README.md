@@ -22,3 +22,4 @@ Ho messo comunque il readme dentro quello, si sono 2 env var da settare.
 
 Il frontend comunica con il backend le modifiche attraverso Websocket ed il backend manda direttamente al target il messaggio attraverso un socket Udp.    
 Nel caso di perdite di connessioni tra backend e frontend, ho messo un timeout di circa 15 secondi (il frontend ci riprova per 5 volte ogni 3 secondi).    
+![output](https://user-images.githubusercontent.com/90763809/230477479-3e9e9196-84a2-4ac8-a61c-aa835dc93caf.gif)
