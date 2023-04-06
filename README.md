@@ -14,5 +14,11 @@ I parametri da settare sono:
 
 Per quanto riguarda lo script da eseguire con una certa periodicità ho trovato un pacchetto che funziona con la stessa sintassi di cron.
 Nella cartella /oscServer c'è un file di configurazione molto generale in cui ho messo solo l'ora a cui eseguire lo script (non so cosa dovrebbe fare, si può estendere).
+
 Ho fatto qualche test(nella cartella test dell'oscServer) e sembra funzionare!
-Ho messo anche dentro un ricevitore che simula il server anche se Nathan mi ha già detto che ne hai uno in Python.
+
+Troverai anche nella cartella receiverTest un mini-server che simula il ricevitore anche se Nathan mi ha già detto che ne hai uno in Python funzionante.   
+Ho messo comunque il readme dentro quello, si sono 2 env var da settare.
+
+Il frontend comunica con il backend le modifiche attraverso Websocket ed il backend manda direttamente al target il messaggio attraverso un socket Udp.    
+Nel caso di perdite di connessioni tra backend e frontend, ho messo un timeout di circa 15 secondi (il frontend ci riprova per 5 volte ogni 3 secondi).    
