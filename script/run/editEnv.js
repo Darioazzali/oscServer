@@ -4,9 +4,12 @@ import { fileURLToPath } from "node:url";
 export const __dirname = dirname(fileURLToPath(import.meta.url));
 export const readEnvFile = (filePath) => {
     const file = fs.readFileSync(filePath, { encoding: "utf-8" }).trim();
-    return file.split("\n").reduce((accumulator, line) => (Object.assign(Object.assign({}, accumulator), { [line.split("=")[0]]: line.split("=")[1] })), {});
+    return file.split("\n").reduce((accumulator, line) => ({
+        ...accumulator,
+        [line.split("=")[0]]: line.split("=")[1],
+    }), {});
 };
-const setEnvVariables = (envObject, variable, newValue) => (Object.assign(Object.assign({}, envObject), { [variable]: newValue }));
+const setEnvVariables = (envObject, variable, newValue) => ({ ...envObject, [variable]: newValue });
 const writeEnvFile = (filePath, envObject) => {
     const trasformato = Object.entries(envObject)
         .map((line) => line.join("="))

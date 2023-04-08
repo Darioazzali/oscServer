@@ -5,12 +5,18 @@ import chalk from "chalk";
 import { getIpAddresses } from "./ipAdresses.js";
 import { execFileSync, spawn } from "node:child_process";
 export const verifyAndConfirmConfiguration = async () => {
-    const actualConfig = readEnvFiles(); //Legge le env variable settate nel frontend e nel backend
-    const verifiedResults = verifyConfigVariables(actualConfig); //Verifica che siano rispettati i parametri
-    if (verifiedResults.valid === false)
-        throw new Error(verifiedResults.why);
-    printActualConfig(actualConfig);
-    return actualConfig;
+    try {
+        const actualConfig = readEnvFiles(); //Legge le env variable settate nel frontend e nel backend
+        const verifiedResults = verifyConfigVariables(actualConfig); //Verifica che siano rispettati i parametri
+        if (verifiedResults.valid === false)
+            throw new Error(verifiedResults.why);
+        printActualConfig(actualConfig);
+        return actualConfig;
+    }
+    catch (err) {
+        console.log(err);
+        throw err;
+    }
 };
 export const installNodePackage = () => execFileSync("npm", ["install"], {
     cwd: "oscServer",

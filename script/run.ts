@@ -9,7 +9,6 @@ import {
   initialQuestions,
   ipServerQuestions,
 } from "./inquirerQuestions.js";
-import { compileFrontend } from "./frontend.js";
 import {
   editBackendVariables,
   editFrontendVariables,
@@ -23,6 +22,9 @@ import {
 import { oscPrompt } from "./oscTargetsConfig.js";
 import { copyFrontendFolder } from "./copyFolder.js";
 import { returnIpAddressAndPortFromPrompt } from "./ipAdresses.js";
+import { readFromConfigFile } from "./readFromConfigFile.js";
+import { compileFrontend } from "./frontend.js";
+import ora from "ora";
 
 const promptInitialQuestions = async (): Promise<any> => {
   clear();
@@ -40,6 +42,21 @@ const promptInitialQuestions = async (): Promise<any> => {
       editFrontendVariables(server);
       editBackendVariables(server.port);
       return await promptInitialQuestions();
+    case "readConfig": {
+      try {
+        const correctConfigFile = readFromConfigFile();
+        editFrontendVariables({ ...correctConfigFile.server });
+        editBackendVariables(correctConfigFile.server.port);
+        editOscTargetVariables(correctConfigFile.oscTarget);
+        // console.log("Configurazione impostata correttamente");
+        ora("Configrazione impostata correttamente").succeed()
+        await waitTerminal();
+        return await promptInitialQuestions();
+      } catch (err) {
+        await printErrorAndWait(err);
+        return await promptInitialQuestions();
+      }
+    }
     case "oscConfig":
       const oscPromtResult = await oscPrompt();
       editOscTargetVariables(oscPromtResult);
@@ -53,18 +70,24 @@ const promptInitialQuestions = async (): Promise<any> => {
         compileFrontend();
         console.log("Frontend Compilato");
         copyFrontendFolder();
-        installServerNodePackage()
+        installServerNodePackage();
         runServer();
       } catch (err: unknown) {
-        await printErrorAndWait;
+        await printErrorAndWait(err);
         return await promptInitialQuestions();
       }
   }
 };
-await promptInitialQuestions();
+(async () => promptInitialQuestions())();
 
 async function printErrorAndWait(err: unknown) {
   const rl = readline.createInterface({ input: stdin, output: stdout });
   await rl.question(`${chalk.red("Errore: ")} ${(err as Error).message}`);
+  rl.close();
+}
+
+async function waitTerminal() {
+  const rl = readline.createInterface({ input: stdin, output: stdout });
+  await rl.question(``);
   rl.close();
 }

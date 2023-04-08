@@ -1,6 +1,8 @@
 import { Answers } from "inquirer";
 import os from "os";
-import { NICAddress } from "./interfaces.js";
+import { NICAddress } from "./interfaces";
+
+export const ipV4Regex = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/;
 
 export const getIpAddresses = (): NICAddress =>
   Object.values(os.networkInterfaces())

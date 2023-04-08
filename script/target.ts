@@ -12,7 +12,7 @@ interface OscTarget {
   [targetName: string]: ipAndPort;
 }
 
-export const readFromConfigFile = (): OscTarget => {
+const readFromListFile = (): OscTarget => {
   return JSON.parse(
     fs.readFileSync(path.join(__dirname, "..", "targets.json"), {
       encoding: "utf-8",
@@ -21,8 +21,8 @@ export const readFromConfigFile = (): OscTarget => {
 };
 
 export const generateOscTargets = () => ({
-  targetsName: Object.keys(readFromConfigFile()),
-  targetsAddresses: Object.values(readFromConfigFile()),
+  targetsName: Object.keys(readFromListFile()),
+  targetsAddresses: Object.values(readFromListFile()),
   *[Symbol.iterator]() {
     let iterationCount: number;
     for (

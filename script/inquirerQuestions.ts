@@ -1,5 +1,5 @@
 import { QuestionCollection } from "inquirer";
-import { getIpAddresses } from "./ipAdresses.js";
+import { getIpAddresses, ipV4Regex } from "./ipAdresses.js";
 import { generateOscTargets } from "./target.js";
 
 export const initialQuestions: QuestionCollection = [
@@ -10,6 +10,7 @@ export const initialQuestions: QuestionCollection = [
     message: "",
     choices: [
       { name: "Avvia server", value: "start" },
+      { name: "Leggi dal file di configurazione", value: "readConfig" },
       { name: "Configura il server", value: "serverConfig" },
       { name: "Configura il target Osc", value: "oscConfig" },
       { name: "Esci", value: "exit" },
@@ -35,7 +36,7 @@ export const ipServerQuestions: QuestionCollection = [
     },
     message: "Indirizzo Ip",
     validate: function (userInput: string) {
-      if (/^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/g.test(userInput)) {
+      if (ipV4Regex.test(userInput)) {
         return true;
       }
       throw Error("Indirizzo Ip invalido");
@@ -77,7 +78,7 @@ export const oscTargetIpAndPortQuestion: QuestionCollection = [
     type: "input",
     message: "Indirizzo Ip",
     validate: function (userInput: string) {
-      if (/^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/g.test(userInput)) {
+      if (ipV4Regex.test(userInput)) {
         return true;
       }
       throw Error("Indirizzo Ip invalido");

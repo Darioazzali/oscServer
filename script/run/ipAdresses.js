@@ -1,10 +1,11 @@
 import os from "os";
+export const ipV4Regex = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/;
 export const getIpAddresses = () => Object.values(os.networkInterfaces())
     .flat()
-    .filter((address) => (address === null || address === void 0 ? void 0 : address.internal) === false && address.family === "IPv4")
-    .map((nonInternalNetworkInterfaces) => nonInternalNetworkInterfaces === null || nonInternalNetworkInterfaces === void 0 ? void 0 : nonInternalNetworkInterfaces.address)
+    .filter((address) => address?.internal === false && address.family === "IPv4")
+    .map((nonInternalNetworkInterfaces) => nonInternalNetworkInterfaces?.address)
     .reduce((accumulator, ipAddress) => {
-    return Object.assign(Object.assign({}, accumulator), { name: ipAddress, ipAddress: ipAddress });
+    return { ...accumulator, name: ipAddress, ipAddress: ipAddress };
 }, {});
 export const returnIpAddressAndPortFromPrompt = (serverConfigPromt) => ({
     ipAddress: serverConfigPromt.local === "manual"
