@@ -4,14 +4,14 @@ import { fileURLToPath } from "url";
 import { dirname } from "node:path";
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = dirname(__filename);
-export const readFromConfigFile = () => {
+const readFromListFile = () => {
     return JSON.parse(fs.readFileSync(path.join(__dirname, "..", "targets.json"), {
         encoding: "utf-8",
     }));
 };
 export const generateOscTargets = () => ({
-    targetsName: Object.keys(readFromConfigFile()),
-    targetsAddresses: Object.values(readFromConfigFile()),
+    targetsName: Object.keys(readFromListFile()),
+    targetsAddresses: Object.values(readFromListFile()),
     *[Symbol.iterator]() {
         let iterationCount;
         for (iterationCount = 0; iterationCount < this.targetsAddresses.length; iterationCount++) {

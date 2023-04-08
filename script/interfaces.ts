@@ -1,3 +1,4 @@
+
 interface FrontendConfig {
   ipAddress: string;
   port: string;
@@ -25,4 +26,24 @@ export interface Host {
 export interface NICAddress {
   name?: string;
   ipAddress?: string;
+}
+
+export interface IpReadFromConfigFile {
+  ipAddress?: string;
+  port: number | string;
+}
+
+export type PossiBleEmpyConfigFile = {
+  server?: IpReadFromConfigFile;
+  oscTarget?: IpReadFromConfigFile;
+};
+
+export type PossibleNumericPort= {
+  server: Required<IpReadFromConfigFile>
+  oscTarget: Required<IpReadFromConfigFile>
+}
+
+export interface ConfigFile {
+  server: FrontendConfig;
+  oscTarget: OscConfig;
 }
