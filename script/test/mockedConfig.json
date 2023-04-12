@@ -1,0 +1,11 @@
+{
+    "server": {
+      "ipAddress": "192.145.6.5",
+      "port": 25
+    },
+    "oscTarget": {
+      "ipAddress": "192.1.0.5",
+      "port": 5217
+    }
+  }
+  

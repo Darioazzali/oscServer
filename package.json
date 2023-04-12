@@ -8,7 +8,7 @@
     "osc": "nodemon --no-stdin ./script/run.ts",
     "build": "tsc && node --experimental-vm-modules ./script/run/run.js",
     "frontend": "npm install --prefix ./frontend/package.json",
-    "test": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js script/test/"
+    "test": "tsc && node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js script/test/"
   },
   "author": "dario",
   "license": "ISC",
@@ -37,6 +37,7 @@
     "prova": "file:frontend",
     "simple-git": "^3.17.0",
     "touch": "^3.1.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "yup": "^1.0.2"
   }
 }

@@ -22,7 +22,7 @@ import {
 import { oscPrompt } from "./oscTargetsConfig.js";
 import { copyFrontendFolder } from "./copyFolder.js";
 import { returnIpAddressAndPortFromPrompt } from "./ipAdresses.js";
-import { readFromConfigFile } from "./readFromConfigFile.js";
+import { readConfigurationFromFile } from "./readFromConfigFile.js";
 import { compileFrontend } from "./frontend.js";
 import ora from "ora";
 
@@ -44,11 +44,10 @@ const promptInitialQuestions = async (): Promise<any> => {
       return await promptInitialQuestions();
     case "readConfig": {
       try {
-        const correctConfigFile = readFromConfigFile();
+        const correctConfigFile = readConfigurationFromFile();
         editFrontendVariables({ ...correctConfigFile.server });
         editBackendVariables(correctConfigFile.server.port);
         editOscTargetVariables(correctConfigFile.oscTarget);
-        // console.log("Configurazione impostata correttamente");
         ora("Configrazione impostata correttamente").succeed()
         await waitTerminal();
         return await promptInitialQuestions();

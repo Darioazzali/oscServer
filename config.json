@@ -1,7 +1,7 @@
 {
   "server": {
     "ipAddress": "192.168.1.174",
-    "port": "254"
+    "port": 8000
   },
   "oscTarget": {
     "ipAddress": "192.1.0.2",
