@@ -126,6 +126,6 @@
     }
   },
 
-  "include": ["script/**/*.ts", "script/readFromConfigFile.old"],
+  "include": ["script/**/*.ts" ],
   "files": ["./script/run.ts"]
 }

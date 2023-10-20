@@ -1,3 +1,1 @@
-{
-  "NodeMapper": { "ipAddress": "192.168.1.60", "port": 5217 }
-}
+{"NodeMapper":{"ipAddress":"192.168.1.60","port":5217},"ricevitore":{"ipAddress":"0.0.0.0","port":"3003"},"Nodemapper2":{"ipAddress":"192.168.1.168","port":"3003"},"oscpe":{"ipAddress":"192.168.1.168","port":"57123"}}
